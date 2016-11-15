@@ -16,13 +16,13 @@ class CreateTicketsTable extends Migration {
 		{
 			$table->increments('id');
 
-            $table->string('title',200);
-            $table->enum('status',['open','closed']);
+            $table->string('title', 200);
+            $table->enum('status', ['open', 'closed']);
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->timestamps();
+			$table->timestamps();
 		});
 	}
 
