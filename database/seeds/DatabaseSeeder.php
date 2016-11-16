@@ -20,13 +20,15 @@ class DatabaseSeeder extends Seeder {
             'password_resets',
             'tickets',
             'ticket_votes',
-            'ticket_comments'
+            'ticket_comments',
+            'test'
         ));
 
 		$this->call('UserTableSeeder');
         $this->call('TicketTableSeeder');
         $this->call('TicketVoteTableSeeder');
         $this->call('TicketCommentTableSeeder');
+        $this->call('TestTableSeeder');
 }
 
     private function truncateTables(array $tables)
