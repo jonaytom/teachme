@@ -3,17 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestTable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('test', function(Blueprint $table)
-		{
+class CreateTestTable extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('test', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name', 200);
@@ -23,17 +20,14 @@ class CreateTestTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
-		});
-	}
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('test');
-	}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::drop('test');
+    }
 }

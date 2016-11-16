@@ -5,18 +5,19 @@ use Faker\Generator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 
-abstract class BaseSeeder extends Seeder {
-
+abstract class BaseSeeder extends Seeder
+{
     protected $total = 50;
-    protected static $pool=array();
+    protected static $pool = array();
 
-    public function run(){
+    public function run()
+    {
         $this->createMultiple($this->total);
     }
 
     protected function createMultiple($total, array $customValues = array())
     {
-        for ($i = 1; $i <= $total; $i++) {
+        for ($i = 1; $i <= $total; ++$i) {
             $this->create($customValues);
         }
     }
@@ -28,35 +29,38 @@ abstract class BaseSeeder extends Seeder {
     {
         $values = $this->getDummyData(Faker::create(), $customValues);
         $values = array_merge($values, $customValues);
+
         return $this->addToPool($this->getModel()->create($values));
     }
 
-    protected function createFrom($seeder, array $customValues = array()){
-        $seeder= new $seeder;
+    protected function createFrom($seeder, array $customValues = array())
+    {
+        $seeder = new $seeder();
+
         return $seeder->create($customValues);
     }
 
-    protected function getRandom($model){
-        if( ! $this->collectionExists($model)){
-           throw new Exception("The $model collection dont exist");
+    protected function getRandom($model)
+    {
+        if (!$this->collectionExists($model)) {
+            throw new Exception("The $model collection dont exist");
         }
 
         return static::$pool[$model]->random();
     }
-
 
     private function addToPool($entity)
     {
         $reflection = new ReflectionClass($entity);
         $class = $reflection->getShortName();
 
-        if(! $this->collectionExists($class)){
-            static::$pool[$class]= new Collection();
+        if (!$this->collectionExists($class)) {
+            static::$pool[$class] = new Collection();
         }
         static::$pool[$class]->add($entity);
+
         return $entity;
     }
-
 
     private function collectionExists($class)
     {

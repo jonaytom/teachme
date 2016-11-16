@@ -1,13 +1,11 @@
 <?php
 
 
-
 use Faker\Generator;
 use TeachMe\Entities\TicketComment;
 
-
-class TicketCommentTableSeeder extends BaseSeeder {
-
+class TicketCommentTableseeder extends BaseSeeder
+{
     protected $total = 250;
 
     public function getModel()
@@ -19,10 +17,10 @@ class TicketCommentTableSeeder extends BaseSeeder {
     {
         return [
 
-            'user_id'   => $this->getRandom('User')->id,
+            'user_id' => $this->getRandom('User')->id,
             'ticket_id' => $this->getRandom('Ticket')->id,
-            'comment'   => $faker->paragraph(),
-            'link'      => $faker->randomElement(['','',$faker->url])
+            'comment' => $faker->paragraph(),
+            'link' => $faker->randomElement(['', '', $faker->url]),
         ];
     }
 }
