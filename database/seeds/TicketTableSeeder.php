@@ -1,6 +1,7 @@
 <?php
 
 
+use Faker\Generator;
 use TeachMe\Entities\Ticket;
 
 class TicketTableSeeder extends BaseSeeder {
@@ -10,17 +11,13 @@ class TicketTableSeeder extends BaseSeeder {
         return new Ticket();
     }
 
-    public function getDummyData(\Faker\Generator $faker, array $customValues = array())
+    public function getDummyData(Generator $faker, array $customValues = array())
     {
         return [
             'title'   => $faker->sentence(),
             'status'  => $faker->randomElement(['open', 'open', 'closed']),
-            'user_id' => 1
+            'user_id' => $this->getRandom('User')->id
         ];
     }
 
-    public function run()
-    {
-        $this->createMultiple(50);
-    }
 }

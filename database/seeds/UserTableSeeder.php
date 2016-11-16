@@ -29,8 +29,8 @@ class UserTableSeeder extends BaseSeeder {
     private function createAdmin()
     {
         $this->create([
-            'name' => 'Duilio Palacios',
-            'email' => 'i@duilio.me',
+            'name' => 'Jonay Torres',
+            'email' => 'jtm@torres.es',
             'password' => bcrypt('admin')
         ]);
     }
